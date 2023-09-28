@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import Header from './header';
+import Main from './main';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello world my name is Noor ^.^</h1>
-    </div>
-  );
+     <>
+        <Header />
+        <Main />
+        
+     </>
+  ); 
 }
 
 export default App;
