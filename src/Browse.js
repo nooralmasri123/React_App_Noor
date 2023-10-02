@@ -25,7 +25,7 @@ function Browse () {
 
     return(
         <>
-            <Form.Select aria-label="Default select example" onChange={handleChange}>
+            <Form.Select aria-label="Default select example" onChange={handleChange} style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between"}} >
                 <option value="all"> All </option>
                 <option value="1">one</option>
                 <option value="2">two</option>
@@ -33,7 +33,7 @@ function Browse () {
             </Form.Select>
         
         <div>
-            {meals.map(function(item){
+            {meals.length !==0 ? meals.map(function(item){
         
         return(
             <>
@@ -42,7 +42,7 @@ function Browse () {
            
             </>
         )
-    })}
+    }):<h3>No Search results ^-^ </h3>}
 
     </div>
         </>

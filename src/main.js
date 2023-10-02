@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 
 function Main (){
 
-  let [items, setItems] = useState ([]);
   let [meals, setMeals] = useState([]);
 
 
@@ -31,7 +30,7 @@ useEffect(function (){getMealsData()}, [])
     event.preventDefault()
       let searchedValue = event.target.search.value;
 
-      let filteredItems = data.filter(function(item){return item.strMeal.toLowerCase().includes(searchedValue.toLowerCase())})
+      let filteredItems = meals.filter(function(item){return item.strMeal.toLowerCase().includes(searchedValue.toLowerCase())})
       setMeals(filteredItems);
   }
     return(
@@ -55,7 +54,7 @@ useEffect(function (){getMealsData()}, [])
       
         )
     }
-):<h3>No Search Results</h3>
+):<h3>No Search Results ^-^ </h3>
   }
  </div>
     </>
