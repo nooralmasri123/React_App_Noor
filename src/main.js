@@ -13,26 +13,26 @@ function Main (){
 
 
 
+
 async function getMealsData (){
   let response = await fetch ('https://www.themealdb.com/api/json/v1/1/search.php?f=m');
   let data = await response.json();
   setMeals(data.meals)
 
 }
+    //link of api
 
-useEffect(function (){getMealsData()}, [])
-
-
-
-
-
-  function handleSubmit (event){
-    event.preventDefault()
+ async  function handleSubmit (event){
+      event.preventDefault()
       let searchedValue = event.target.search.value;
-
-      let filteredItems = meals.filter(function(item){return item.strMeal.toLowerCase().includes(searchedValue.toLowerCase())})
-      setMeals(filteredItems);
+      let response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=' + searchedValue );
+      let data = await response.json();
+      setMeals(data.meals)    
   }
+
+
+  useEffect(function (){getMealsData();}, [])
+
     return(
     <>
       <Form className="d-flex" onSubmit={handleSubmit} style={{marginTop:"2%", marginLeft:"26%", marginRight:"26%"}}>

@@ -4,9 +4,11 @@ import { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import CardComp from './card';
 
+
 function Browse () {
     
     let [meals, setMeals] = useState([]);
+    let [categories , setCategories] = useState([])
 
     async function getMealsData (){
         let response = await fetch ('https://www.themealdb.com/api/json/v1/1/search.php?f=m');
@@ -16,23 +18,43 @@ function Browse () {
       }
 
 
-    function handleChange(){}
+   async function showTheCategories (){
+        let response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+        let data = await response.json()
+        setCategories(data.meals)
+
+   }
+
+   async function handleChange(event){
+        let selectValues = event.target.value
+        let response = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=' + selectValues);
+        let data = await response.json()
+        setMeals(data.meals)
+   }
       
-    useEffect(function (){getMealsData()}, [])
+    useEffect(function (){getMealsData()
+        showTheCategories()
+    }, [])
     
 
 
 
     return(
         <>
-            <Form.Select aria-label="Default select example" onChange={handleChange} style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between"}} >
+            <Form.Select aria-label="Default select example"  onChange={handleChange} >
                 <option value="all"> All </option>
-                <option value="1">one</option>
-                <option value="2">two</option>
-                <option value="3">three</option>
+                {
+                    categories.map(function(category){
+                        return <option value={category.strCategory}>
+                            {
+                                category.strCategory
+                            }
+                        </option>
+                    })
+                }
             </Form.Select>
         
-        <div>
+        <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between"}}>
             {meals.length !==0 ? meals.map(function(item){
         
         return(
