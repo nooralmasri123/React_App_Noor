@@ -60,7 +60,7 @@ function Browse () {
         return(
             <>
 
-            <CardComp image={item.strMealThumb} title={item.strMeal} description={item.strInstructions}/>
+            <CardComp image={item.strMealThumb} title={item.strMeal} description={item.strInstructions} showFavorites={true}/>
            
             </>
         )
