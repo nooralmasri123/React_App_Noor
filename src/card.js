@@ -2,11 +2,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 function CardComp (props){
 
   let [show, setShow] = useState(false);
+  let { user } = useAuth0();
+
 
     function handleShow (){
       setShow(!show)
@@ -19,7 +22,7 @@ function CardComp (props){
 
       let stringData = localStorage.getItem("favorites")
       let arr = JSON.parse(stringData);
-      arr.push(props)
+      arr.push({...props , email:user.email})
 
       let stringedData = JSON.stringify(arr)
       localStorage.setItem("favorites", stringedData)
@@ -27,7 +30,7 @@ function CardComp (props){
 
       else{
         let arr = [];
-        arr.push(props)
+        arr.push({...props , email:user.email})
         let stringedData = JSON.stringify(arr)
         localStorage.setItem("favorites", stringedData)
       }
@@ -49,7 +52,10 @@ function CardComp (props){
       }
         
 
-        <Button onClick={props.handleDelete}>Delete</Button>
+       {props.showDelete? <Button onClick={props.handleDelete}>Delete</Button> 
+       : <Button onClick={props.handleDelete} style={{display:"none"}}>Delete</Button>
+       
+      }
 
       </Card.Body>
     </Card>

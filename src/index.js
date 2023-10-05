@@ -11,8 +11,8 @@ root.render(
 
   <React.StrictMode>
      <Auth0Provider
-        domain = "dev-fa2uym2zqta10wht.us.auth0.com"
-        clientId = "qvEqsL9LHJLiBk0GWOycNG6huEJqLMqO"
+        domain = {process.env.REACT_APP_DOMAIN}
+        clientId = {process.env.REACT_APP_CLIENTID}
         redirectUri = {window.location.origin}
      >
        <App />

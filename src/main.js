@@ -1,4 +1,3 @@
-import data from './data.json';
 import CardComp from './card';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
@@ -51,7 +50,7 @@ async function getMealsData (){
         
         return(
           <>
-            <CardComp image={item.strMealThumb} title={item.strMeal} description={item.strInstructions} showFavorites={true}/>
+            <CardComp image={item.strMealThumb} title={item.strMeal} description={item.strInstructions} showFavorites={true} showDelete={false}/>
             </>
       
         )

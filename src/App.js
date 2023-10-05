@@ -1,10 +1,10 @@
-import logo from './logo.svg';
+
 import './App.css';
 import Header from './header';
 import Main from './main';
 import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom';
 import Browse from './Browse';
-import Favorites from './favorites';
+import Profile from './profile';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
             <Routes>
                <Route path="/" Component={Main}></Route>
                <Route path="/Browse" Component={Browse} ></Route>
-               <Route path="/favorites" Component={Favorites} ></Route>
+               <Route path="/profile" Component={Profile} ></Route>
 
             </Routes>
          </Router>

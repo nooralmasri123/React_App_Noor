@@ -8,7 +8,9 @@ import LogoutButton from './logout';
 import LoginButton from './login';
 
 function Header() {
-  let{isAuthenticated} = useAuth0()
+  let{isAuthenticated, user} = useAuth0()
+  console.log(user)
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -18,7 +20,7 @@ function Header() {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/Browse">Browse</Nav.Link>
-            <Nav.Link href="/favorites">Favorites</Nav.Link>
+            {isAuthenticated && <Nav.Link href="/profile">Profile</Nav.Link>}
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -32,7 +34,13 @@ function Header() {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-        {isAuthenticated ? <LogoutButton /> : <LoginButton />}
+        {isAuthenticated ? 
+          <>
+        <LogoutButton /> 
+        <img src={user.picture} style={{width:"40px" , height:"40px", margin:"0 10px 0 10px "}}/>
+        <h4>{user.name}</h4>
+          </>
+        : <LoginButton />}
       </Container>
     </Navbar>
   );

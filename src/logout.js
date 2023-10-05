@@ -7,14 +7,15 @@ const LogoutButton = () => {
     return(
         <button
             className="btn btn-danger btn-block"
-            onClick={() => logout({ returnTo: window.location.origin, })
+            onClick={() => logout({ returnTo: window.location.origin, 
+            })
         }
         >
             Logout
 
         </button>
-    )
-}
+    );
+};
 
 export default LogoutButton;
 
