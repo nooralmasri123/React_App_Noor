@@ -4,10 +4,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 function Profile (){
 
-    let {isAuthenticated, user} = useAuth0();
+    let {isAuthenticated, user, isLoading} = useAuth0();
     let stringedFavorites = localStorage.getItem("favorites");
     let favorites = JSON.parse(stringedFavorites);
-    let [favoritesState , setFavoritesState] = useState([]);
+    let [favoritesState , setFavoritesState] = useState(favorites);
 
 
 
@@ -24,21 +24,26 @@ function Profile (){
 
       function filterByEmail(){
         if(isAuthenticated){
-          let filteredData = favoritesState.filter(function(item){ return user.email === item.email })
+          let filteredData = favoritesState.filter(function(item){ return user.email == item.email })
           setFavoritesState(filteredData)
         }
       }
 
 
-      useEffect(function(){filterByEmail()}, [])
-  
-
-
+    useEffect (() => {
+        if (!isLoading) {
+          filterByEmail();
+        }
+      },[isLoading]);
+        
+        
+       
 
     return(
         <>
       <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-between", gap:"20px", marginTop:"3%", marginLeft:"8%", marginRight:"8%"}}>
       {isAuthenticated && favoritesState.length !==0 ? favoritesState.map(function(item, index){
+        
         
     return(
         <>
